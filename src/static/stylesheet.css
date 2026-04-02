@@ -1,0 +1,458 @@
+:root {
+    --grid-template: 40px minmax(150px, 4fr) minmax(100px, 3fr) minmax(100px, 2fr) 60px 90px;
+}
+
+body {
+    background-color: #121212;
+    color: white;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #000;
+    padding: 24px;
+}
+
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    color: #b3b3b3;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.sidebar li .material-symbols-rounded {
+    font-size: 24px;
+}
+
+.sidebar li:hover {
+    color: white;
+}
+
+.content {
+    background: linear-gradient(to bottom, #1e1e1e, #121212);
+    padding: 20px;
+    overflow-y: auto;
+    padding-bottom: 110px;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+}
+
+/* Hlavička tabulky */
+.song-list-header {
+    display: grid;
+    grid-template-columns: var(--grid-template);
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    color: #b3b3b3;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Řádek tabulky */
+.song-item {
+    display: grid;
+    grid-template-columns: var(--grid-template);
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    margin: 2px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: #b3b3b3;
+}
+
+.song-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.song-item.active .song-title {
+    color: #1db954 !important;
+}
+
+.song-item.active .song-artist {
+    color: #1db954;
+    opacity: 0.8;
+}
+
+.song-index {
+    text-align: right;
+    padding-right: 10px;
+    font-size: 15px;
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.song-album, .song-date {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.song-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-artist {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- NOVÝ PŘEHRÁVAČ (FOOTER) --- */
+.player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    background-color: #181818;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    border-top: 1px solid #282828;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.player-left {
+    width: 30%;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+}
+
+.player-center {
+    width: 40%;
+    max-width: 722px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.player-right {
+    width: 30%;
+    min-width: 180px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.now-playing {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.song-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+#current-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#current-artist {
+    margin: 0;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.player-btn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-btn:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+.play-main {
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+}
+
+.play-main:hover {
+    transform: scale(1.1);
+    background-color: #f0f0f0;
+}
+
+.play-main .material-symbols-rounded {
+    font-size: 32px;
+    color: black;
+}
+
+.material-symbols-rounded {
+    font-variation-settings: 'FILL' 1;
+}
+
+#main-content {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 0 !important;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.time-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+#progress-bar, #volume-bar {
+    height: 4px;
+    cursor: pointer;
+    accent-color: #fff;
+}
+
+#progress-bar { flex-grow: 1; }
+#volume-bar { width: 100px; }
+
+#progress-bar:hover, #volume-bar:hover {
+    accent-color: #1db954;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b3b3b3;
+}
+
+#add-to-playlist-btn {
+    color: #b3b3b3;
+    transition: color 0.2s, transform 0.2s;
+    background: none;
+    border: none;
+}
+
+#add-to-playlist-btn:hover {
+    color: #1db954;
+    transform: scale(1.1);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #282828;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #3e3e3e;
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 15px 0;
+}
+
+.playlist-option {
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #b3b3b3;
+    transition: background 0.2s, color 0.2s;
+}
+
+.playlist-option:hover {
+    background-color: #3e3e3e;
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid #b3b3b3;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-to-playlist.is-added span {
+    color: #1db954;
+    font-variation-settings: 'FILL' 1;
+}
+
+.add-to-playlist.is-added {
+    cursor: pointer;
+}
+
+.context-menu {
+    display: none;
+    position: absolute;
+    background-color: #282828;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    z-index: 2000;
+    padding: 4px 0;
+    min-width: 160px;
+}
+
+.context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.context-menu li {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #b3b3b3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.context-menu li:hover {
+    background-color: #3e3e3e;
+    color: white;
+}
+
+.context-menu li .material-symbols-rounded {
+    font-size: 18px;
+}
+
+.artist-track-item {
+    display: grid;
+    /* Rozvržení sloupců: Index | Obrázek | Název | Přehrání | Oblíbené | Čas */
+    grid-template-columns: 30px 40px 1fr 150px 40px 50px;
+    gap: 16px;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #b3b3b3;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+.artist-track-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.artist-track-item.active .track-title {
+    color: #1db954 !important;
+}
+
+.artist-track-item .track-index {
+    text-align: right;
+    font-size: 14px;
+}
+
+.artist-track-item .track-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.artist-track-item .track-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.track-img-placeholder {
+    width: 40px;
+    height: 40px;
+    background: #282828;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
